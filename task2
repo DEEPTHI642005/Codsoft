@@ -1,0 +1,40 @@
+import tkinter as tk
+from tkinter import messagebox
+import random
+
+# Initialize the main window
+root = tk.Tk()
+root.title("Rock Paper Scissors")
+root.geometry("400x300")
+
+# Choices available
+choices = ["Rock", "Paper", "Scissors"]
+
+# Game logic functions
+def play(user_choice):
+    computer_choice = random.choice(choices)
+    result = determine_winner(user_choice, computer_choice)
+    messagebox.showinfo("Result", f"You chose {user_choice}\nComputer chose {computer_choice}\n{result}")
+
+def determine_winner(user, computer):
+    if user == computer:
+        return "It's a tie!"
+    elif (user == "Rock" and computer == "Scissors") or \
+         (user == "Paper" and computer == "Rock") or \
+         (user == "Scissors" and computer == "Paper"):
+        return "You win!"
+    else:
+        return "You lose!"
+
+# Buttons for user choices
+btn_rock = tk.Button(root, text="Rock", command=lambda: play("Rock"), width=15, height=2)
+btn_rock.pack(pady=10)
+
+btn_paper = tk.Button(root, text="Paper", command=lambda: play("Paper"), width=15, height=2)
+btn_paper.pack(pady=10)
+
+btn_scissors = tk.Button(root, text="Scissors", command=lambda: play("Scissors"), width=15, height=2)
+btn_scissors.pack(pady=10)
+
+# Start the Tkinter event loop
+root.mainloop()
